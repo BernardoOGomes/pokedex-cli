@@ -1,0 +1,13 @@
+# Virtual environment (recreated from requirements files)
+.venv/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Project specification (kept local)
+DOC-20261001-WA0022.pdf

@@ -1,0 +1,18 @@
+[project]
+name = "pokedex-cli"
+version = "0.1.0"
+description = "Command-line Pokedex that queries the PokeAPI."
+requires-python = ">=3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+# E/W: style errors, F: real bugs (unused imports, undefined names),
+# I: import sorting, B: common bug patterns, UP: modern Python syntax
+select = ["E", "W", "F", "I", "B", "UP"]
