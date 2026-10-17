@@ -1,12 +1,42 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "pokedex-cli"
-version = "0.1.0"
+dynamic = ["version"]  # read from pokedex/__init__.py (single source of truth)
 description = "Command-line Pokedex that queries the PokeAPI."
+readme = "README.md"
+license = "MIT"
 requires-python = ">=3.13"
+dependencies = ["requests>=2.32"]
+
+[project.scripts]
+# After "pip install -e .", the command "pokedex" runs pokedex.main:main
+pokedex = "pokedex.main:main"
+
+[tool.setuptools.packages.find]
+include = ["pokedex*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "pokedex.__version__" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+# Tests marked "integration" use the real internet: skipped unless asked for
+# with "pytest -m integration".
+addopts = "-m 'not integration' --strict-markers"
+markers = ["integration: talks to the real PokeAPI (needs internet)"]
+
+[tool.coverage.run]
+source = ["pokedex"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 95
 
 [tool.ruff]
 line-length = 88
@@ -14,5 +44,11 @@ target-version = "py313"
 
 [tool.ruff.lint]
 # E/W: style errors, F: real bugs (unused imports, undefined names),
-# I: import sorting, B: common bug patterns, UP: modern Python syntax
-select = ["E", "W", "F", "I", "B", "UP"]
+# I: import sorting, B: common bug patterns, UP: modern Python syntax,
+# SIM: simplifications, RUF: ruff's own rules, PT: pytest style
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF", "PT"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+files = ["pokedex", "tests"]

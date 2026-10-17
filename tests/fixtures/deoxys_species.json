@@ -1,0 +1,34 @@
+{
+  "id": 386,
+  "name": "deoxys",
+  "varieties": [
+    {
+      "is_default": true,
+      "pokemon": {
+        "name": "deoxys-normal",
+        "url": "https://pokeapi.co/api/v2/pokemon/386/"
+      }
+    },
+    {
+      "is_default": false,
+      "pokemon": {
+        "name": "deoxys-attack",
+        "url": "https://pokeapi.co/api/v2/pokemon/10001/"
+      }
+    },
+    {
+      "is_default": false,
+      "pokemon": {
+        "name": "deoxys-defense",
+        "url": "https://pokeapi.co/api/v2/pokemon/10002/"
+      }
+    },
+    {
+      "is_default": false,
+      "pokemon": {
+        "name": "deoxys-speed",
+        "url": "https://pokeapi.co/api/v2/pokemon/10003/"
+      }
+    }
+  ]
+}

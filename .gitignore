@@ -1,13 +1,19 @@
 # Virtual environment (recreated from requirements files)
 .venv/
 
-# Tool caches
+# Tool caches and reports
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 
-# Python bytecode
+# Python bytecode and packaging artifacts
 __pycache__/
 *.pyc
+*.egg-info/
+build/
+dist/
 
 # Project specification (kept local)
 DOC-20261001-WA0022.pdf
