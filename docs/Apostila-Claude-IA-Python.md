@@ -1676,7 +1676,10 @@ Se tudo passa localmente, o CI deve passar também. Se falha, é melhor descobri
 O histórico real do Pokedex, do mais novo para o mais antigo:
 
 ```text
-7c97026 Add GitHub Actions CI workflow
+(novo)  Update docs with final CI status   <- o commit que traz esta versão da apostila
+cf6bc4b Exclude docs folder from ruff checks
+8144af5 Add GitHub Actions CI workflow
+9b73dcb Add project manual and study handbook in docs
 0f25fa5 Add README, license and update roadmap
 282726e Add test suite with fixtures, coverage and type checking
 e85e36b Add interactive CLI menu and command-line entry point
@@ -1702,7 +1705,7 @@ git status -sb              # "## main...origin/main [ahead 1]" = 1 commit local
 
 O repositório do projeto: [github.com/BernardoOGomes/pokedex-cli](https://github.com/BernardoOGomes/pokedex-cli), com tópicos (`python`, `cli`, `pokeapi`, `pytest`, `rest-api`, `portfolio`) que ajudam a ser encontrado.
 
-**Um caso real de permissão:** o primeiro push foi recusado com a mensagem "refusing to allow an OAuth App to create or update workflow without `workflow` scope". O GitHub exige uma permissão extra para enviar arquivos de CI, porque eles executam código nos servidores do GitHub. A solução foi enviar todo o resto e deixar o commit do CI para depois que o dono da conta conceder a permissão (`gh auth refresh -h github.com -s workflow`). Antes de enviados, commits locais podem ser reorganizados com segurança; depois de enviados, reescrever o histórico atrapalha quem já baixou.
+**Um caso real de permissão:** o primeiro push foi recusado com a mensagem "refusing to allow an OAuth App to create or update workflow without `workflow` scope". O GitHub exige uma permissão extra para enviar arquivos de CI, porque eles executam código nos servidores do GitHub. A solução foi enviar todo o resto, reorganizar os commits locais para que o do CI ficasse por último, e enviá-lo depois que o dono da conta concedeu a permissão no navegador (`gh auth refresh -h github.com -s workflow`). Antes de enviados, commits locais podem ser reorganizados com segurança; depois de enviados, reescrever o histórico atrapalha quem já baixou.
 
 Outro aviso que apareceu: "LF will be replaced by CRLF". Windows e Linux marcam o fim de linha de formas diferentes (CRLF x LF); o Git converte automaticamente. É só informativo.
 
@@ -1727,6 +1730,15 @@ jobs:
 ```
 
 O resultado vira o selo "CI passing" no README. Ele prova a quem visita o repositório que o projeto instala do zero e passa em tudo, num computador que não é o seu.
+
+**O CI pegou um erro de verdade neste projeto.** A primeira execução falhou no Ubuntu (e o Windows foi cancelado em seguida). O log mostrava `1 file would be reformatted`: o `ruff format --check` passou a analisar também os blocos de código Python *dentro dos arquivos Markdown* desta apostila, que acabara de ser adicionada em `docs/`. A verificação local não tinha sido repetida depois disso. O caminho seguido foi o do Módulo 6:
+
+1. **Ler o log** antes de mexer em qualquer coisa (`gh run view --log-failed`).
+2. **Reproduzir localmente:** `ruff format --check .` falhou do mesmo jeito.
+3. **Corrigir a causa, não o sintoma:** reformatar os trechos estragaria os contraexemplos de propósito; o certo era dizer ao ruff que `docs/` não é código do projeto (`extend-exclude = ["docs"]` no `pyproject.toml`).
+4. **Verificar de novo:** os mesmos comandos do CI localmente, depois o push, depois a nova execução: verde no Ubuntu e no Windows.
+
+**Contraexemplo:** desligar a verificação que falhou ("tira o `ruff format` do CI") para o selo ficar verde. O selo deixaria de significar alguma coisa.
 
 ### 20.6 README e licença
 

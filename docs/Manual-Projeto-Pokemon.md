@@ -220,7 +220,12 @@ Bugs e problemas encontrados durante o trabalho, e como cada um foi resolvido:
 | `025` dava "not found" | A API não aceita zeros à esquerda | `normalize_query` converte para `25` |
 | mypy recusou o dublê de stdin herdando de `StringIO` | Assinatura de `readline` incompatível nos stubs | Classe simples só com `readline` |
 
-Git e GitHub (2026-10-17): o trabalho virou 5 commits, enviados ao repositório público [github.com/BernardoOGomes/pokedex-cli](https://github.com/BernardoOGomes/pokedex-cli). Um sexto commit, com o arquivo de CI, está só no computador: o GitHub recusou o envio porque o login do `gh` não tem a permissão `workflow`. Para enviar, rode `gh auth refresh -h github.com -s workflow` e depois `git push`.
+Git e GitHub (2026-10-17): o repositório público [github.com/BernardoOGomes/pokedex-cli](https://github.com/BernardoOGomes/pokedex-cli) tem 9 commits, incluindo a pasta `docs/` com este manual e a apostila (Markdown, Word e PDF). O CI roda a cada push e **passa no Ubuntu e no Windows**.
+
+Duas lições reais do envio:
+
+- O GitHub recusou o primeiro envio do arquivo de CI porque o login do `gh` não tinha a permissão `workflow`. O dono da conta concedeu a permissão no navegador (`gh auth refresh -h github.com -s workflow`) e o envio funcionou.
+- A primeira execução do CI **falhou**: o `ruff format --check` passou a analisar também os blocos de código dentro dos arquivos Markdown da apostila, que são trechos didáticos (alguns são contraexemplos de propósito). A verificação local não tinha sido repetida depois de adicionar os documentos. Correção: `extend-exclude = ["docs"]` no `pyproject.toml`; a segunda execução passou nos dois sistemas. É exatamente para isso que o CI existe: pegar o que escapou na máquina de quem programou.
 
 ## Próximos passos e perguntas de revisão
 
@@ -228,7 +233,7 @@ O código foi escrito de uma vez, então o aprendizado agora vem de estudá-lo. 
 
 Passos imediatos:
 
-- [ ] Conceder a permissão workflow ao gh e enviar o commit do CI
+- [x] Conceder a permissão workflow ao gh e enviar o commit do CI (feito; CI verde)
 - [ ] Conferir o repositório público `pokedex-cli` no GitHub (README, tópicos e, depois do CI, o selo verde)
 - [ ] Estudar a Apostila: Claude, IA e Python na prática e responder as perguntas abaixo (pode ser no chat, uma etapa por vez)
 
