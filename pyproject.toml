@@ -41,6 +41,9 @@ fail_under = 95
 [tool.ruff]
 line-length = 88
 target-version = "py313"
+# docs/ holds study material whose Markdown code blocks are teaching snippets
+# (some are deliberate counterexamples), not project source code.
+extend-exclude = ["docs"]
 
 [tool.ruff.lint]
 # E/W: style errors, F: real bugs (unused imports, undefined names),
