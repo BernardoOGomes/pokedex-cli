@@ -151,6 +151,15 @@ python -m mypy                      # static type checking (strict mode)
 All three, plus the tests, run automatically on every push through
 [GitHub Actions](.github/workflows/ci.yml) on Ubuntu and Windows.
 
+## Documentation
+
+The [`docs/`](docs/) folder has study material in Brazilian Portuguese, in
+Markdown, Word and PDF:
+
+- **Project manual**: architecture, decisions explained, tests and history.
+- **Course handbook**: AI, Claude and every concept used in this project, from zero,
+  with exercises and an answer key.
+
 ## Possible improvements
 
 - Persistent cache on disk (e.g. `requests-cache` or SQLite) between runs.

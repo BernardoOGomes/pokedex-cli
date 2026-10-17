@@ -53,7 +53,7 @@ Claude implementa em partes pequenas → Bernardo acompanha e valida → pergunt
 ## Etapa 8 — Acabamento e portfólio
 - [x] `ruff check` / `ruff format` limpos e todos os testes passando
 - [x] README em inglês (o que é, como rodar, como testar)
-- [ ] Criar repositório público no GitHub (com aprovação) e fazer push  ← pendente: aguarda aprovação
+- [x] Criar repositório público no GitHub e fazer push: https://github.com/BernardoOGomes/pokedex-cli
 - [x] Lista de melhorias futuras
 
 ## Verificação final
@@ -73,3 +73,4 @@ Claude implementa em partes pequenas → Bernardo acompanha e valida → pergunt
 - [x] mypy em modo estrito, pytest-cov (100% de cobertura), testes de integração marcados
 - [x] `pyproject.toml` instalável (`pip install -e .` cria o comando `pokedex`)
 - [x] CI no GitHub Actions (Ubuntu + Windows) e licença MIT
+- [x] Manual do projeto e apostila de estudo em `docs/` (Markdown, Word e PDF)
